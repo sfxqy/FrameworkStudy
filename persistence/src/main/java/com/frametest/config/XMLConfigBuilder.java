@@ -1,6 +1,12 @@
 package com.frametest.config;
 
 import com.frametest.pojo.Configuration;
+import com.frametest.pojo.MappedStatement;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import java.beans.PropertyVetoException;
+import java.util.Iterator;
+import java.util.Map;
+import javax.sql.DataSource;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -12,18 +18,41 @@ import java.util.Properties;
 
 public class XMLConfigBuilder {
 
+    private Configuration configuration;
 
-    public Configuration parseConfig(InputStream in)throws DocumentException {
+    public XMLConfigBuilder(){
+        configuration = new Configuration();
+    }
+
+
+    //解析xml文件
+    public Configuration parseConfig(InputStream in)throws DocumentException, PropertyVetoException {
         SAXReader saxReader = new SAXReader();
-
         Document document = saxReader.read(in);
         Element el = document.getRootElement();
-        List<Element> list = el.selectNodes("//property");
+        List<Element> propertyList = el.selectNodes("//property");
         Properties properties = new Properties();
-        for (Element e:list){
-            
+        for (Element e:propertyList){
+            String name = e.attributeValue("name");
+            String value = e.attributeValue("value");
+            properties.setProperty(name,value);
         }
-        return null;
+        List<Element> mapperList = el.selectNodes("//mapper");
+        for (Element e:mapperList){
+            String resourcePath = e.attributeValue("resource");
+            InputStream resourceAsStream = XMLConfigBuilder.class.getClassLoader()
+                .getResourceAsStream(resourcePath);
+            XMLMapperBuilder xmlMapperBuilder = new XMLMapperBuilder(configuration);
+            xmlMapperBuilder.parse(resourceAsStream);
+        }
+        ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
+        comboPooledDataSource.setDriverClass("driverClass");
+        comboPooledDataSource.setJdbcUrl("jdbcUrl");
+        comboPooledDataSource.setUser("username");
+        comboPooledDataSource.setPassword("password");
+        configuration.setDataSource(comboPooledDataSource);
+        return configuration;
 
     }
+
 }
