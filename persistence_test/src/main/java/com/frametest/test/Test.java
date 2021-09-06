@@ -1,6 +1,8 @@
 package com.frametest.test;
 
 import com.frametest.io.Resources;
+import com.frametest.sqlSession.SqlSession;
+import com.frametest.sqlSession.SqlSessionFactory;
 import com.frametest.sqlSession.SqlSessionFactoryBuilder;
 import java.io.InputStream;
 
@@ -10,11 +12,11 @@ import java.io.InputStream;
 public class Test {
 
   public static void main(String[] args) throws Exception{
-    InputStream resourceAsStream = Test.class.getClassLoader()
-        .getResourceAsStream("classpath://sqlMapperConfig.xml");
     InputStream reourcesAsStream = Resources.getReourcesAsStream("sqlMapperConfig.xml");
     SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-    sqlSessionFactoryBuilder.build(reourcesAsStream);
+    SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(reourcesAsStream);
+    SqlSession sqlSession1 = sqlSessionFactory.openSession();
+
 
   }
 
