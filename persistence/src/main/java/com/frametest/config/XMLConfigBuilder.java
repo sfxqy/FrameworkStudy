@@ -46,10 +46,10 @@ public class XMLConfigBuilder {
             xmlMapperBuilder.parse(resourceAsStream);
         }
         ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
-        comboPooledDataSource.setDriverClass("driverClass");
-        comboPooledDataSource.setJdbcUrl("jdbcUrl");
-        comboPooledDataSource.setUser("username");
-        comboPooledDataSource.setPassword("password");
+        comboPooledDataSource.setDriverClass(properties.getProperty("driverClass"));
+        comboPooledDataSource.setJdbcUrl(properties.getProperty("jdbcUrl"));
+        comboPooledDataSource.setUser(properties.getProperty("username"));
+        comboPooledDataSource.setPassword(properties.getProperty("password"));
         configuration.setDataSource(comboPooledDataSource);
         return configuration;
 

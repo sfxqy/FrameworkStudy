@@ -1,6 +1,6 @@
 <mapper namespace="userMapper">
 
-  <select id="selectOne" resultType="com.frametest.pojo.User" paramType="com.frametest.com.frametest.pojo.User">
+  <select id="selectOne" resultType="com.frametest.pojo.User" paramType="com.frametest.pojo.User">
     select *from user where id=#{id}
   </select>
 
