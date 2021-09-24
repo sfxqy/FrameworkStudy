@@ -44,8 +44,10 @@ public class DefaultSqlSession implements SqlSession {
     Proxy.newProxyInstance(DefaultSqlSession.class.getClassLoader(),new Class[]{mapperClass},
     new InvocationHandler() {
       //proxy:当前代理对象的应用  method：当前被调用方法的引用  args:传递的参数
+      //准备参数 1.statmentId sql语句的唯一标识  namespace.id=接口全限定名.方法名称
       @Override
       public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
         return null;
       }
     });
