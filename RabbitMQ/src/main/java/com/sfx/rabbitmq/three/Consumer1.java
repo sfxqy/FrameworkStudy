@@ -8,7 +8,7 @@ import com.sfx.rabbitmq.utils.ChannelUtils;
 /**
  * @author sfx
  */
-public class Consumer {
+public class Consumer1 {
 
   public static void main(String[] args) throws Exception{
     String QUEUE_NAME="basicAck";
@@ -35,7 +35,7 @@ public class Consumer {
      * 4、消费者取消消费的回调
      */
     System.out.println(Thread.currentThread().getId());
-    channel.basicConsume(QUEUE_NAME,false,deliverCallback,cancelCallback);
+    channel.basicConsume(QUEUE_NAME,deliverCallback,cancelCallback);
   }
 
 }

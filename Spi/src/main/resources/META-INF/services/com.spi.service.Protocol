@@ -1,0 +1,2 @@
+com.spi.service.impl.DubboProtocol
+com.spi.service.impl.RegisteredProtocol

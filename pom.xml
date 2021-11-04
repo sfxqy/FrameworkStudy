@@ -13,6 +13,8 @@
     <module>persistence_test</module>
     <module>RabbitMQ</module>
     <module>Elasticsearch</module>
+    <module>DesignPatterns</module>
+    <module>Spi</module>
   </modules>
 
   <properties>
