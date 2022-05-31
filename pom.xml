@@ -17,6 +17,7 @@
     <module>Spi</module>
     <module>untitled</module>
     <module>Spring</module>
+    <module>ThreadLearning</module>
   </modules>
 
   <properties>
